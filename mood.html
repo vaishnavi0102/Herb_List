@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerbList</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .mood-buttons {
+            display:ruby;
+            size: 40px;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .mood-button span {
+        font-size: 50px; 
+        }
+        .mood-button {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: none;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mood-button:active {
+            transform: scale(0.95);
+        }
+
+        .mood-button:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .mood-button:hover:before {
+            background-color: #66BB6A;
+        }
+
+        /* Hidden radio buttons */
+        .mood-radio {
+            display: none;
+        }
+
+        .fact-container {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            text-align: left;
+        }
+
+        /* Mood Facts */
+        .mood-radio:checked + .mood-button + .fact-container {
+            display: block;
+        }
+
+        .fact-container p {
+            color: #333;
+        }
+
+        /* Specific styling for each fact container */
+        .happy-fact {
+            background-color: #ffeb3b;
+        }
+
+        .neutral-fact {
+            background-color: #c2a3a3;
+        }
+
+        .sad-fact {
+            background-color: #a7b7c7;
+        }
+
+        .angry-fact {
+            background-color: #f44336;
+        }
+
+        .fact-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Plant Mood Helper</h1>
+
+    <!-- Mood Buttons Section -->
+    <div class="mood-buttons">
+        <!-- Sad Mood Button -->
+        <input type="radio" id="sad" name="mood" class="mood-radio">
+        <label for="sad" class="mood-button">
+            <span>😢</span>
+        </label>
+        <div class="fact-container sad-fact">
+            <div class="fact-title">Sad Mood 🌱</div>
+            <p>If you're feeling sad, plants like Rosemary and Lavender can help reduce stress and improve your indoor air quality. Studies have shown that spending time with plants can help improve mood and emotional well-being.</p>
+        </div>
+
+        <!-- Neutral Mood Button -->
+        <input type="radio" id="neutral" name="mood" class="mood-radio">
+        <label for="neutral" class="mood-button">
+            <span>😐</span>
+        </label>
+        <div class="fact-container neutral-fact">
+            <div class="fact-title">Neutral Mood 🌿</div>
+            <p>Neutral mood? Try placing plants like Aloe Vera or Spider Plant in your space! They purify the air and promote a sense of calm. These plants are also easy to care for and perfect for any space.</p>
+        </div>
+
+        <!-- Happy Mood Button -->
+        <input type="radio" id="happy" name="mood" class="mood-radio">
+        <label for="happy" class="mood-button">
+            <span>😊</span>
+        </label>
+        <div class="fact-container happy-fact">
+            <div class="fact-title">Happy Mood 🌞</div>
+            <p>Happy? Plants like Lavender, Jasmine, and Rose are perfect for boosting your mood. Their natural scents promote relaxation and can even help you sleep better. Add some color and fragrance to brighten your day!</p>
+        </div>
+
+        <!-- Angry Mood Button -->
+        <input type="radio" id="angry" name="mood" class="mood-radio">
+        <label for="angry" class="mood-button">
+            <span>😡</span>
+        </label>
+        <div class="fact-container angry-fact">
+            <div class="fact-title">Angry Mood 🌿</div>
+            <p>When feeling angry, plants like Chamomile and Lavender can help calm your emotions. The soothing properties of these plants can ease tension and bring a sense of peace. Aromatherapy with these plants can be quite effective!</p>
+        </div>
+    </div>
+
+</body>
+</html>
