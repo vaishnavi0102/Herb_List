@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plant Suggestions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f1f8e9, #e8f5e9);
+      padding: 30px;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      color: #2e7d32;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .plant-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin: 15px auto;
+      padding: 20px;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .plant-card h2 {
+      color: #388e3c;
+      margin-bottom: 10px;
+    }
+
+    .plant-card p {
+      margin: 6px 0;
+      font-size: 15px;
+    }
+
+    .no-results {
+      color: red;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #75d184;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #64c471;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌿 Your Plant Recommendations</h1>
+  <div id="output"></div>
+  <button onclick="history.back()">← Back to Symptoms</button>
+
+  <script>
+    const plantSuggestions = {
+      cold: ["Tulsi", "Ginger"],
+      cough: ["Peppermint", "Ginger"],
+      headache: ["Lavender", "Peppermint"],
+      stress: ["Chamomile", "Lavender"],
+      insomnia: ["Chamomile", "Lavender"],
+      nausea: ["Ginger", "Peppermint"],
+      bloating: ["Fenugreek", "Ginger"],
+      "sore-throat": ["Tulsi", "Turmeric"],
+      menstrual: ["Chamomile", "Turmeric"],
+      "dry-skin": ["Neem", "Lavender"],
+      fever: ["Neem", "Tulsi"]
+    };
+
+    const usageTips = {
+      Tulsi: "Make tulsi tea using fresh leaves. Good for immunity and colds.",
+      Ginger: "Boil slices in water to make a soothing tea. Helps with nausea, cold, and bloating.",
+      Peppermint: "Use dried leaves for tea. Calms headaches and digestion.",
+      Lavender: "Inhale oil for stress relief, or apply diluted oil for skin issues.",
+      Chamomile: "Steep in hot water for a relaxing sleep-time tea.",
+      Neem: "Use neem paste for skin or boil leaves to reduce fever.",
+      Turmeric: "Add a pinch to warm milk for anti-inflammatory effects.",
+      Fenugreek: "Soak seeds overnight and drink water in the morning for digestion."
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const symptoms = params.getAll("symptom");
+    const allergies = params.getAll("allergy");
+
+    const plantSet = new Set();
+
+    for (let symptom of symptoms) {
+      const suggested = plantSuggestions[symptom];
+      if (suggested) {
+        for (let plant of suggested) {
+          if (!allergies.includes(plant)) {
+            plantSet.add(plant);
+          }
+        }
+      }
+    }
+
+    const outputDiv = document.getElementById("output");
+
+    if (plantSet.size === 0) {
+      outputDiv.innerHTML = "<p class='no-results'>No suitable plant remedies found based on your input.</p>";
+    } else {
+      plantSet.forEach(plant => {
+        const card = document.createElement("div");
+        card.className = "plant-card";
+        card.innerHTML = `
+          <h2>${plant}</h2>
+          <p><strong>Use Tip:</strong> ${usageTips[plant] || "General herbal use recommended."}</p>
+        `;
+        outputDiv.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
